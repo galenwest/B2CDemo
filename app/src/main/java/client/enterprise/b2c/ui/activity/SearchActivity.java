@@ -24,7 +24,7 @@ import client.enterprise.b2c.ui.view.SearchView;
 /**
  * Created by raohoulin on 2015.12.27.
  */
-public class SearchActivity extends BaseActivity implements SearchView, View.OnClickListener, AdapterView.OnItemClickListener {
+public class SearchActivity extends BaseActivity implements SearchView, SelectHistoryAdapter.upSearchOnEditTextListener, View.OnClickListener, AdapterView.OnItemClickListener {
 
     @Bind(R.id.back) ImageView back;
     @Bind(R.id.search) ImageView search;
@@ -124,5 +124,10 @@ public class SearchActivity extends BaseActivity implements SearchView, View.OnC
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+    }
+
+    @Override
+    public void upOnText(String search) {
+        searchText.setText(search);
     }
 }
