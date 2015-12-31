@@ -39,7 +39,7 @@
         android:id="@+id/search_history_result"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
+        android:visibility="visible"
         android:orientation="vertical">
 
         <TextView
@@ -61,10 +61,11 @@
             android:id="@+id/clean_history"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="6dp"
+            android:minHeight="40dp"
             android:gravity="center"
             android:background="@drawable/clean_history_button_bg"
             android:textSize="16sp"

@@ -51,6 +51,11 @@ public class SearchPerImpl implements SearchPer, SearchFinishedListener {
     }
 
     @Override
+    public void onClearItemHistory(int position, long time) {
+        searchInter.deleteAItem(this, time, position);
+    }
+
+    @Override
     public void onResumeFinished(List<SearchHistoryData> items) {
         if (items.size() > 0) {
             searchView.setListItems(items);
@@ -67,7 +72,18 @@ public class SearchPerImpl implements SearchPer, SearchFinishedListener {
 
     @Override
     public void onClearHistoryFinished() {
-        searchView.notifyDataSetChanged();
+        searchView.cleanAllItem();
         searchView.hideSearchResult();
+    }
+
+    @Override
+    public void onClearItemHistoryFinished(int position, List<SearchHistoryData> items) {
+        if (items.size() < 1) {
+            searchView.cleanAItem(position);
+            searchView.hideSearchResult();
+        } else {
+            searchView.cleanAItem(position);
+        }
+
     }
 }

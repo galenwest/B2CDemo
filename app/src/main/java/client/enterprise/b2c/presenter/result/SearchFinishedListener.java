@@ -11,4 +11,5 @@ public interface SearchFinishedListener {
     public void onResumeFinished(List<SearchHistoryData> items);
     public void onClickSearchFinished();
     public void onClearHistoryFinished();
+    public void onClearItemHistoryFinished(int position, List<SearchHistoryData> items);
 }

@@ -35,13 +35,23 @@ public class SearchHistoryDatabase {
 
     /**
      * 删
-     *
      * @param id
      */
     public void delete(int id) {
         SQLiteDatabase sqlite = dbHelper.getWritableDatabase();
         String sql = ("delete from " + DatabaseHelper.SEARCH_TABLE_NAME + " where _id=?");
         sqlite.execSQL(sql, new Integer[] { id });
+        sqlite.close();
+    }
+
+    /**
+     * 根据时间删
+     * @param time
+     */
+    public void delete(long time) {
+        SQLiteDatabase sqlite = dbHelper.getWritableDatabase();
+        String sql = ("delete from " + DatabaseHelper.SEARCH_TABLE_NAME + " where writeTime=?");
+        sqlite.execSQL(sql, new Long[] { time });
         sqlite.close();
     }
 

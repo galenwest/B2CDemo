@@ -5,12 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
+import client.enterprise.b2c.AppContext;
 import client.enterprise.b2c.R;
 import client.enterprise.b2c.model.bean.SearchHistoryData;
+import client.enterprise.b2c.presenter.SearchPer;
 
 /**
  * Created by raohoulin on 2015.12.29.
@@ -18,10 +21,12 @@ import client.enterprise.b2c.model.bean.SearchHistoryData;
 public class SelectHistoryAdapter extends BaseAdapter {
     public List<SearchHistoryData> searchData;
     private Context context;
+    private SearchPer searchPer;
 
-    public SelectHistoryAdapter(Context context, List<SearchHistoryData> searchData) {
+    public SelectHistoryAdapter(Context context, List<SearchHistoryData> searchData, SearchPer searchPer) {
         this.context = context;
         this.searchData = searchData;
+        this.searchPer = searchPer;
     }
 
     @Override
@@ -58,6 +63,7 @@ public class SelectHistoryAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.item_search_histroy, null);
 
             viewHolder.searchItem = (TextView) convertView.findViewById(R.id.search_item);
+            viewHolder.deleteItem = (ImageView) convertView.findViewById(R.id.delete_item);
 
             convertView.setTag(viewHolder);
         } else {
@@ -69,6 +75,7 @@ public class SelectHistoryAdapter extends BaseAdapter {
         SearchHistoryData historyData = getItem(position);
         if (null != historyData) {
             viewHolder.searchItem.setText(historyData.getSearch());
+            viewHolder.deleteItem.setOnClickListener(new DeleteListener(position, historyData.getWriteTime()));
         }
 
         return convertView;
@@ -76,5 +83,21 @@ public class SelectHistoryAdapter extends BaseAdapter {
 
     private static class ViewHolder {
         TextView searchItem;
+        ImageView deleteItem;
+    }
+
+    private class DeleteListener implements View.OnClickListener{
+        int position;
+        long time;
+
+        public DeleteListener(int position, long time) {
+            this.position = position;
+            this.time = time;
+        }
+
+        @Override
+        public void onClick(View v) {
+            searchPer.onClearItemHistory(position, time);
+        }
     }
 }

@@ -32,4 +32,11 @@ public class SearchInterImpl implements SearchInter {
         searchDB.delete();
         finishedListener.onClearHistoryFinished();
     }
+
+    @Override
+    public void deleteAItem(SearchFinishedListener finishedListener, long time, int position) {
+        searchDB = new SearchHistoryDatabase(AppContext.getInstance());
+        searchDB.delete(time);
+        finishedListener.onClearItemHistoryFinished(position, searchDB.query());
+    }
 }

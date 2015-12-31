@@ -95,7 +95,7 @@ public class SearchActivity extends BaseActivity implements SearchView, View.OnC
     @Override
     public void setListItems(List<SearchHistoryData> items) {
         searchHistoryDatas = items;
-        selectHistoryAdapter = new SelectHistoryAdapter(this, searchHistoryDatas);
+        selectHistoryAdapter = new SelectHistoryAdapter(this, searchHistoryDatas, searchPer);
         searchList.setAdapter(selectHistoryAdapter);
     }
 
@@ -110,8 +110,14 @@ public class SearchActivity extends BaseActivity implements SearchView, View.OnC
     }
 
     @Override
-    public void notifyDataSetChanged() {
+    public void cleanAllItem() {
         searchHistoryDatas.clear();
+        selectHistoryAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void cleanAItem(int position) {
+        searchHistoryDatas.remove(position);
         selectHistoryAdapter.notifyDataSetChanged();
     }
 

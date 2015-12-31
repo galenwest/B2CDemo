@@ -10,4 +10,5 @@ public interface SearchInter {
     public void findItem(SearchFinishedListener finishedListener);
     public void insertItem(SearchFinishedListener finishedListener, SearchHistoryData data);
     public void deleteAllItem(SearchFinishedListener finishedListener);
+    public void deleteAItem(SearchFinishedListener finishedListener, long time, int position);
 }

@@ -13,5 +13,6 @@ public interface SearchView {
     public void setListItems(List<SearchHistoryData> items);
     public void navigateTo();
     public void toastSearchNull();
-    public void notifyDataSetChanged();
+    public void cleanAllItem();
+    public void cleanAItem(int position);
 }
