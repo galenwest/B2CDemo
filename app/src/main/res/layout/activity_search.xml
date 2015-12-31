@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="@drawable/top_bar_bg">
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/back"/>
+        <client.enterprise.b2c.widget.SearchEditText
+            android:id="@+id/search_text"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/top_bar_edit_bg"
+            android:drawableLeft="@mipmap/search_icon"
+            android:hint="@string/search_things"
+            android:textColorHint="#c7c6c5"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="18sp"
+            android:gravity="center_vertical|left"/>
+        <ImageView
+            android:id="@+id/search"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/search_right" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/search_history_result"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="#717171"
+            android:background="@color/white"
+            android:textSize="16sp"
+            android:text="@string/search_history"/>
+        <ListView
+            android:id="@+id/search_history_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:divider="@color/gray"
+            android:dividerHeight="1dp" />
+        <Button
+            android:id="@+id/clean_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:gravity="center"
+            android:background="@drawable/clean_history_button_bg"
+            android:textSize="16sp"
+            android:text="@string/clean_history"/>
+    </LinearLayout>
+</LinearLayout>
