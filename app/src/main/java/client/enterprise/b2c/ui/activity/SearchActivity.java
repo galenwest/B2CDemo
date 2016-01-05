@@ -1,5 +1,7 @@
 package client.enterprise.b2c.ui.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -133,5 +135,10 @@ public class SearchActivity extends BaseActivity implements SearchView, SelectHi
     @Override
     public void upOnText(String search) {
         searchText.setText(search);
+    }
+
+    public static void actionStart(Context context) {
+        Intent intent = new Intent(context, SearchActivity.class);
+        context.startActivity(intent);
     }
 }

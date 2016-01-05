@@ -1,5 +1,6 @@
 package client.enterprise.b2c.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -56,15 +57,12 @@ public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnC
 
                     @Override
                     public void rightClick() {
-                        Toast.makeText(MainActivity.this,
-                                "right", Toast.LENGTH_SHORT)
-                                .show();
+                        ShoppingCarActivity.actionStart(MainActivity.this);
                     }
 
                     @Override
                     public void titleViewClick() {
-                        Intent intent = new Intent(MainActivity.this, SearchActivity.class);
-                        startActivity(intent);
+                        SearchActivity.actionStart(MainActivity.this);
                     }
 
                     @Override
@@ -123,5 +121,10 @@ public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnC
             transaction.addToBackStack(null);
         }
         transaction.commit();
+    }
+
+    public static void actionStart(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
     }
 }

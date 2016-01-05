@@ -126,10 +126,10 @@ public class TopBarSon extends FrameLayout {
                 mListener.oneClick();
             }
         });
-        twoView.setOnClickListener(new OnClickListener() {
+        logoView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.twoClick();
+                mListener.logoClick();
             }
         });
         threeView.setOnClickListener(new OnClickListener() {
@@ -152,7 +152,7 @@ public class TopBarSon extends FrameLayout {
 
     public interface topbarClickListener {
         void oneClick();
-        void twoClick();
+        void logoClick();
         void threeClick();
         void foreClick();
     }

@@ -6,12 +6,13 @@
     android:orientation="vertical">
 
     <client.enterprise.b2c.widget.TopBarSon
+        android:id="@+id/top_bar_son"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         shopping:oneImgSrc="@drawable/back_selector"
         shopping:logoImgSrc="@mipmap/logo"
         shopping:threeImgSrc="@mipmap/search_icon"
         shopping:foreImgSrc="@mipmap/shopping"
-        shopping:foreVisibility="gone" />
+        shopping:foreVisibility="visible" />
 
 </LinearLayout>
