@@ -13,7 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:scaleType="fitCenter"
-            android:src="@mipmap/back"/>
+            android:src="@drawable/back_selector"/>
         <client.enterprise.b2c.widget.SearchEditText
             android:id="@+id/search_text"
             android:layout_width="0dp"
@@ -39,7 +39,7 @@
         android:id="@+id/search_history_result"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
+        android:visibility="gone"
         android:orientation="vertical">
 
         <TextView

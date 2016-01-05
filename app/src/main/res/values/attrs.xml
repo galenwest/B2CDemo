@@ -8,4 +8,15 @@
         <attr name="rightImgSrc" format="reference|color" />
     </declare-styleable>
 
+    <declare-styleable name="TopBarSon">
+        <attr name="oneImgSrc" format="reference|color" />
+        <attr name="logoImgSrc" format="reference|color" />
+        <attr name="threeImgSrc" format="reference|color" />
+        <attr name="foreImgSrc" format="reference|color" />
+        <attr name="foreVisibility" format="enum" >
+            <enum name="visible" value="0" />
+            <enum name="invisible" value="1" />
+            <enum name="gone" value="2" />
+        </attr>
+    </declare-styleable>
 </resources>

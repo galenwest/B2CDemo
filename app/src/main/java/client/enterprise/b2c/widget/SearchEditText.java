@@ -7,11 +7,11 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.AutoCompleteTextView;
 
 import client.enterprise.b2c.R;
 
-public class SearchEditText extends EditText implements View.OnFocusChangeListener,TextWatcher {
+public class SearchEditText extends AutoCompleteTextView implements View.OnFocusChangeListener,TextWatcher {
   /**
    * 删除按钮的引用
    */

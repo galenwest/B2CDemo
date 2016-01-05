@@ -58,6 +58,7 @@ public class SearchActivity extends BaseActivity implements SearchView, SelectHi
         back.setOnClickListener(this);
         search.setOnClickListener(this);
         cleanHistory.setOnClickListener(this);
+        searchList.setOnItemClickListener(this);
     }
 
     @Override
@@ -123,7 +124,10 @@ public class SearchActivity extends BaseActivity implements SearchView, SelectHi
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        ListView listView = (ListView) parent;
+        SearchHistoryData data = (SearchHistoryData) listView.getItemAtPosition(position);
+        String search = data.getSearch();
+        Toast.makeText(this, search, Toast.LENGTH_SHORT).show();
     }
 
     @Override

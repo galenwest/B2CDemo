@@ -1,5 +1,7 @@
 package client.enterprise.b2c.model.interactor.impl;
 
+import java.util.List;
+
 import client.enterprise.b2c.AppContext;
 import client.enterprise.b2c.model.bean.SearchHistoryData;
 import client.enterprise.b2c.model.data.db.SearchHistoryDatabase;
@@ -22,7 +24,12 @@ public class SearchInterImpl implements SearchInter {
     @Override
     public void insertItem(SearchFinishedListener finishedListener, SearchHistoryData data) {
         searchDB = new SearchHistoryDatabase(AppContext.getInstance());
-        searchDB.insert(data);
+        List<SearchHistoryData> list = searchDB.query(" where search='" + data.getSearch() + "'");
+        if (list.size() > 0) {
+            searchDB.update(data);
+        } else {
+            searchDB.insert(data);
+        }
         finishedListener.onClickSearchFinished();
     }
 

@@ -72,9 +72,9 @@ public class SearchHistoryDatabase {
      */
     public void update(SearchHistoryData data) {
         SQLiteDatabase sqlite = dbHelper.getWritableDatabase();
-        String sql = ("update " + DatabaseHelper.SEARCH_TABLE_NAME + " set search=?, writeTime=? where _id=?");
+        String sql = ("update " + DatabaseHelper.SEARCH_TABLE_NAME + " set writeTime=? where search=?");
         sqlite.execSQL(sql,
-                new String[] { data.getSearch(), data.getWriteTime() + "", data.getId() + "" });
+                new String[] { data.getWriteTime() + "", data.getSearch() });
         sqlite.close();
     }
 
