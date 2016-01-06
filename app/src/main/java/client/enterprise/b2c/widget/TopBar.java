@@ -77,7 +77,6 @@ public class TopBar extends LinearLayout {
         mLeftView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
         mRightView.setImageDrawable(mRightImgSrc);
-
         mRightView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
         mTitleView.setText(mTitle);

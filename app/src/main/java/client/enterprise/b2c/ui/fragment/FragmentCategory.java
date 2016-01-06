@@ -7,15 +7,31 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import client.enterprise.b2c.R;
+import client.enterprise.b2c.base.BaseFragment;
 
 /**
  * Created by noruto on 2015.12.26.
  */
-public class FragmentCategory extends Fragment {
+public class FragmentCategory extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.index_category, null);
+        View view = super.onCreateView(inflater, container, savedInstanceState);
         return view;
+    }
+
+    @Override
+    public int getLayoutID() {
+        return R.layout.index_category;
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initData() {
+
     }
 }

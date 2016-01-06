@@ -29,7 +29,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.ShoppingCarActivity"
+            android:name=".ui.activity.SonActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
     </application>

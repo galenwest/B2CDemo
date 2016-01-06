@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -27,7 +28,8 @@ public class TopBarSon extends FrameLayout {
     private ImageView logoView;
 
     // 布局属性，用来控制组件元素在ViewGroup中的位置
-    private LinearLayout.LayoutParams oneParams, twoParams, threeParams, foreParams, logoParams;
+    private LinearLayout.LayoutParams oneParams, twoParams, threeParams, foreParams;
+    private LayoutParams logoParams;
 
     private Drawable oneImgSrc;
     private Drawable logoImgSrc;
@@ -117,7 +119,8 @@ public class TopBarSon extends FrameLayout {
 
         addView(linearLayout, 0);
 
-        logoParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        logoParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+        logoParams.gravity = Gravity.CENTER;
         addView(logoView, 1, logoParams);
 
         oneView.setOnClickListener(new OnClickListener() {
