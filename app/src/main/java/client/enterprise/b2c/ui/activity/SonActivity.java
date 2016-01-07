@@ -10,12 +10,15 @@ import android.support.v4.app.FragmentTransaction;
 import butterknife.Bind;
 import client.enterprise.b2c.R;
 import client.enterprise.b2c.base.BaseFragmentActivity;
+import client.enterprise.b2c.ui.fragment.ShoppingCar;
 import client.enterprise.b2c.widget.TopBarSon;
 
 /**
  * Created by raohoulin on 2016.1.5.
  */
 public class SonActivity extends BaseFragmentActivity {
+    private static final String SONTAG = "sonTag";
+
     @Bind(R.id.top_bar_son)
     TopBarSon topBarSon;
     private FragmentManager fragmentManager;
@@ -23,7 +26,7 @@ public class SonActivity extends BaseFragmentActivity {
 
     public static void actionStart(Context context, String tag) {
         Intent intent = new Intent(context, SonActivity.class);
-        intent.putExtra("tag", tag);
+        intent.putExtra(SONTAG, tag);
         context.startActivity(intent);
     }
 
@@ -34,7 +37,7 @@ public class SonActivity extends BaseFragmentActivity {
 
     @Override
     public int getLayoutID() {
-        return R.layout.shopping_car;
+        return R.layout.activity_son;
     }
 
     @Override
@@ -48,7 +51,7 @@ public class SonActivity extends BaseFragmentActivity {
 
             @Override
             public void logoClick() {
-                MainActivity.actionStart(SonActivity.this);
+                MainActivity.actionStart(SonActivity.this, true);
             }
 
             @Override
@@ -58,16 +61,23 @@ public class SonActivity extends BaseFragmentActivity {
 
             @Override
             public void foreClick() {
+                changeFragment(new ShoppingCar(), true);
             }
         });
 
-
+        switch (tag) {
+            case "ShoppingCar" :
+                changeFragment(new ShoppingCar(), true);
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
     public void initData() {
         Intent intent = getIntent();
-        tag = intent.getStringExtra("tag");
+        tag = intent.getStringExtra(SONTAG);
     }
 
     public void changeFragment(Fragment fragment, boolean isInit) {

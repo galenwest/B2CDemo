@@ -79,8 +79,7 @@ public class WelcomeGuideAut extends BaseActivity {
 
     @OnClick(R.id.redirect_button)
     void redirectTo(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        MainActivity.actionStart(this, true);
         finish();
     }
 }

@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">B2C</string>
+    <string name="go_shopping">继续购物</string>
+    <string name="no_goods_text">您的购物车没有商品\n把心仪的商品放入购物车吧</string>
     <string name="redirect">点击进入</string>
     <string name="tip_double_click_exit">再次点击退出程序</string>
     <string name="main_home">首页</string>

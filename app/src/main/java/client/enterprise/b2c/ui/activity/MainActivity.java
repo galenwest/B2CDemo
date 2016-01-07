@@ -26,8 +26,11 @@ import client.enterprise.b2c.widget.TopBar;
  */
 public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnCheckedChangeListener {
 
+    private static final String ISHOMETAG = "isHome";
+
     private DoubleClickExitHelper mDoubleClickExit;
     private FragmentManager fragmentManager;
+    private boolean isHome;
 
     @Bind(R.id.main_button_tabs) RadioGroup group;
     @Bind(R.id.main_home) RadioButton mainHome;
@@ -42,16 +45,20 @@ public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnC
     }
 
     @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        processExtraData();
+    }
+
+    @Override
     public int getLayoutID() {
         return R.layout.activity_main;
     }
 
     @Override
     public void initView() {
-        fragmentManager = getSupportFragmentManager();
-        mainHome.setChecked(true);
         group.setOnCheckedChangeListener(this);
-        changeFragment(new FragmentHome(), false);
         mTopbar.setOnTopbarClickListener(
                 new TopBar.topbarClickListener() {
 
@@ -79,6 +86,7 @@ public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnC
 
     @Override
     public void initData() {
+        processExtraData();
         mDoubleClickExit = new DoubleClickExitHelper(this);
     }
 
@@ -123,8 +131,20 @@ public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnC
         transaction.commit();
     }
 
-    public static void actionStart(Context context) {
+    public static void actionStart(Context context, boolean isHome) {
         Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra(ISHOMETAG, isHome);
         context.startActivity(intent);
     }
+
+    private void processExtraData() {
+        Intent intent = getIntent();
+        isHome = intent.getBooleanExtra(ISHOMETAG, false);
+        fragmentManager = getSupportFragmentManager();
+        if (isHome) {
+            mainHome.setChecked(true);
+            changeFragment(new FragmentHome(), false);
+        }
+    }
+
 }

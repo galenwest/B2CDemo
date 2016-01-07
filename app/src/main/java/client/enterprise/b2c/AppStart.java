@@ -40,8 +40,7 @@ public class AppStart extends BaseActivity {
 
     private void redirectTo() {
         if (SharedUtil.getWelcomeBoolean(getBaseContext())) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+            MainActivity.actionStart(this, true);
         } else {
             Intent intent = new Intent(this, WelcomeGuideAut.class);
             startActivity(intent);
