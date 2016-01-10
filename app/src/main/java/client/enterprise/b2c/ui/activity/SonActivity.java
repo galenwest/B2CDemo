@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import butterknife.Bind;
 import client.enterprise.b2c.R;
 import client.enterprise.b2c.base.BaseFragmentActivity;
+import client.enterprise.b2c.ui.fragment.Login;
 import client.enterprise.b2c.ui.fragment.ShoppingCar;
 import client.enterprise.b2c.widget.TopBarSon;
 
@@ -18,6 +19,9 @@ import client.enterprise.b2c.widget.TopBarSon;
  */
 public class SonActivity extends BaseFragmentActivity {
     private static final String SONTAG = "sonTag";
+
+    public static final String SHOPPINGCAR = "ShoppingCar";
+    public static final String LOGIN = "login";
 
     @Bind(R.id.top_bar_son)
     TopBarSon topBarSon;
@@ -66,8 +70,11 @@ public class SonActivity extends BaseFragmentActivity {
         });
 
         switch (tag) {
-            case "ShoppingCar" :
+            case SHOPPINGCAR :
                 changeFragment(new ShoppingCar(), true);
+                break;
+            case LOGIN:
+                changeFragment(new Login(), true);
                 break;
             default:
                 break;

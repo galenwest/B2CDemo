@@ -64,7 +64,7 @@ public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnC
 
                     @Override
                     public void rightClick() {
-                        SonActivity.actionStart(MainActivity.this, "ShoppingCar");
+                        SonActivity.actionStart(MainActivity.this, SonActivity.SHOPPINGCAR);
                     }
 
                     @Override

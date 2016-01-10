@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_gb_repeat_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="vertical">
+
+        <client.enterprise.b2c.widget.SearchEditText
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@mipmap/login_edit_bg"
+            android:padding="6dp"
+            android:hint="@string/hint_username"
+            android:textColorHint="@color/ivory"
+            android:drawableLeft="@mipmap/username_icon"
+            android:textSize="20sp"/>
+
+        <client.enterprise.b2c.widget.SearchEditText
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:background="@mipmap/login_edit_bg"
+            android:padding="6dp"
+            android:inputType="textPassword"
+            android:hint="@string/hint_password"
+            android:textColorHint="@color/ivory"
+            android:drawableLeft="@mipmap/password_icon"
+            android:textSize="20sp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="28dp"
+            android:paddingRight="28dp"
+            android:layout_marginTop="10dp">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/checkbox_selector"
+                android:layout_alignParentLeft="true"
+                android:paddingLeft="10dp"
+                android:textSize="18sp"
+                android:textColor="@color/dimgrey"
+                android:text="@string/show_password"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/checkbox_selector"
+                android:layout_alignParentRight="true"
+                android:paddingLeft="10dp"
+                android:textSize="18sp"
+                android:textColor="@color/dimgrey"
+                android:text="@string/save_password"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp">
+
+            <Button
+                android:id="@+id/login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/login_bt_bg"
+                android:textColor="#aa7103"
+                android:textSize="20sp"
+                android:text="@string/login_text"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/login"
+                android:textSize="14sp"
+                android:text="@string/forget_password"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp">
+
+            <TextView
+                android:id="@+id/register_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:textSize="16sp"
+                android:text="@string/do_not_account"/>
+            <Button
+                android:id="@+id/register"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/register_bt_bg"
+                android:minHeight="36dp"
+                android:textSize="16sp"
+                android:text="@string/register_text"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

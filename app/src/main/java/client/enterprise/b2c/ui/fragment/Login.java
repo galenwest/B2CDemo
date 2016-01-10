@@ -1,21 +1,17 @@
 package client.enterprise.b2c.ui.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import butterknife.OnClick;
 import client.enterprise.b2c.R;
 import client.enterprise.b2c.base.BaseFragment;
-import client.enterprise.b2c.ui.activity.SonActivity;
 
 /**
- * Created by noruto on 2015.12.26.
+ * Created by raohoulin on 2016.1.9.
  */
-public class FragmentMine extends BaseFragment {
+public class Login extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -25,7 +21,7 @@ public class FragmentMine extends BaseFragment {
 
     @Override
     public int getLayoutID() {
-        return R.layout.index_mine;
+        return R.layout.login;
     }
 
     @Override
@@ -36,10 +32,5 @@ public class FragmentMine extends BaseFragment {
     @Override
     public void initData() {
 
-    }
-
-    @OnClick(R.id.user_info_login)
-    public void clickView(View view) {
-        SonActivity.actionStart(getContext(), SonActivity.LOGIN);
     }
 }

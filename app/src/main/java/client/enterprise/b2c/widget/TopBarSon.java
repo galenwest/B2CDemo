@@ -19,7 +19,6 @@ import client.enterprise.b2c.R;
  * Created by raohoulin on 2015.12.26.
  */
 public class TopBarSon extends FrameLayout {
-    // 包含topbar上的元素：左按钮、右按钮、标题
     private ImageView oneView;
     private View twoView;
     private ImageView threeView;
@@ -27,7 +26,6 @@ public class TopBarSon extends FrameLayout {
     private LinearLayout linearLayout;
     private ImageView logoView;
 
-    // 布局属性，用来控制组件元素在ViewGroup中的位置
     private LinearLayout.LayoutParams oneParams, twoParams, threeParams, foreParams;
     private LayoutParams logoParams;
 
