@@ -1,6 +1,5 @@
 package client.enterprise.b2c.ui.activity;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -37,7 +36,7 @@ public class WelcomeGuideAut extends BaseActivity {
 
     @Override
     public int getLayoutID() {
-        return R.layout.welcome_guide;
+        return R.layout.activity_welcome_guide;
     }
 
     @Override

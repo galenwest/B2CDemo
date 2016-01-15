@@ -39,7 +39,7 @@ public class FragmentMine extends BaseFragment {
     }
 
     @OnClick(R.id.user_info_login)
-    public void clickView(View view) {
+    public void loginView(View view) {
         SonActivity.actionStart(getContext(), SonActivity.LOGIN);
     }
 }

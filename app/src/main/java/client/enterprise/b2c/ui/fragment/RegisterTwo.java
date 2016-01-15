@@ -21,7 +21,7 @@ public class RegisterTwo extends BaseFragment {
 
     @Override
     public int getLayoutID() {
-        return R.layout.register_two;
+        return R.layout.fragment_register_two;
     }
 
     @Override

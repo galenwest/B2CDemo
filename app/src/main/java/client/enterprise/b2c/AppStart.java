@@ -29,7 +29,7 @@ public class AppStart extends BaseActivity {
 
     @Override
     public int getLayoutID() {
-        return R.layout.welcome;
+        return R.layout.activity_welcome;
     }
 
     @Override

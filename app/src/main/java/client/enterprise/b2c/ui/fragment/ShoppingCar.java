@@ -23,7 +23,7 @@ public class ShoppingCar extends BaseFragment {
 
     @Override
     public int getLayoutID() {
-        return R.layout.shopping_car;
+        return R.layout.fragment_shopping_car;
     }
 
     @Override

@@ -21,8 +21,11 @@ public abstract class BaseFragmentActivity extends FragmentActivity implements B
         }
 
         ButterKnife.bind(this);
-        initData();
-        initView();
+
+        if (savedInstanceState == null) {
+            initData();
+            initView();
+        }
     }
 
     @Override

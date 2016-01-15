@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.widget.Toast;
 
 import butterknife.Bind;
 import client.enterprise.b2c.R;
 import client.enterprise.b2c.base.BaseFragmentActivity;
 import client.enterprise.b2c.ui.fragment.Login;
+import client.enterprise.b2c.ui.fragment.RegisterOne;
+import client.enterprise.b2c.ui.fragment.RegisterTwo;
 import client.enterprise.b2c.ui.fragment.ShoppingCar;
 import client.enterprise.b2c.widget.TopBarSon;
 
@@ -21,11 +24,12 @@ public class SonActivity extends BaseFragmentActivity {
     private static final String SONTAG = "sonTag";
 
     public static final String SHOPPINGCAR = "ShoppingCar";
-    public static final String LOGIN = "login";
+    public static final String LOGIN = "fragment_login";
 
     @Bind(R.id.top_bar_son)
     TopBarSon topBarSon;
     private FragmentManager fragmentManager;
+    private FragmentTransaction transaction;
     private String tag;
 
     public static void actionStart(Context context, String tag) {
@@ -50,7 +54,8 @@ public class SonActivity extends BaseFragmentActivity {
         topBarSon.setOnTopbarClickListener(new TopBarSon.topbarClickListener() {
             @Override
             public void oneClick() {
-                finish();
+                if (!fragmentManager.popBackStackImmediate())
+                    finish();
             }
 
             @Override
@@ -88,7 +93,7 @@ public class SonActivity extends BaseFragmentActivity {
     }
 
     public void changeFragment(Fragment fragment, boolean isInit) {
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.son_content, fragment);
         if (!isInit) {
             transaction.addToBackStack(null);

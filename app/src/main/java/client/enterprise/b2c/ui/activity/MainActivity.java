@@ -28,8 +28,14 @@ public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnC
 
     private static final String ISHOMETAG = "isHome";
 
+    public static final String HOME = "home";
+    public static final String CATEGOTY = "category";
+    public static final String FIND = "find";
+    public static final String MINE = "mine";
+
     private DoubleClickExitHelper mDoubleClickExit;
     private FragmentManager fragmentManager;
+    private Fragment homeFragment, categoryFragment, findFragment, mineFragment;
     private boolean isHome;
 
     @Bind(R.id.main_button_tabs) RadioGroup group;
@@ -106,29 +112,93 @@ public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnC
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
             case R.id.main_home:
-                changeFragment(new FragmentHome(), true);
+                changeFragment(HOME, true);
                 break;
             case R.id.main_category:
-                changeFragment(new FragmentCategory(), true);
+                changeFragment(CATEGOTY, true);
                 break;
             case R.id.main_find:
-                changeFragment(new FragmentFind(), true);
+                changeFragment(FIND, true);
                 break;
             case R.id.main_mine:
-                changeFragment(new FragmentMine(), true);
+                changeFragment(MINE, true);
                 break;
             default:
                 break;
         }
     }
 
-    public void changeFragment(Fragment fragment, boolean isInit) {
+    public void changeFragment(String tab, boolean isInit) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.main_content, fragment);
+
+        switch (tab) {
+            case HOME:
+                homeFragment=fragmentManager.findFragmentByTag(HOME);
+                hideTab(transaction);
+                if (homeFragment == null){
+                    homeFragment = new FragmentHome();
+                    transaction.add(R.id.main_content, homeFragment,HOME);
+                } else{
+                    transaction.show(homeFragment);
+                }
+                break;
+            case CATEGOTY:
+                categoryFragment=fragmentManager.findFragmentByTag(CATEGOTY);
+                hideTab(transaction);
+                if (categoryFragment == null){
+                    categoryFragment = new FragmentCategory();
+                    transaction.add(R.id.main_content, categoryFragment,CATEGOTY);
+                } else{
+                    transaction.show(categoryFragment);
+                }
+                break;
+            case FIND:
+                findFragment=fragmentManager.findFragmentByTag(FIND);
+                hideTab(transaction);
+                if (findFragment == null){
+                    findFragment = new FragmentFind();
+                    transaction.add(R.id.main_content, findFragment,FIND);
+                } else{
+                    transaction.show(findFragment);
+                }
+                break;
+            case MINE:
+                mineFragment=fragmentManager.findFragmentByTag(MINE);
+                hideTab(transaction);
+                if (mineFragment == null){
+                    mineFragment = new FragmentMine();
+                    transaction.add(R.id.main_content, mineFragment,MINE);
+                } else{
+                    transaction.show(mineFragment);
+                }
+                break;
+            default:
+                break;
+        }
+
         if (!isInit) {
             transaction.addToBackStack(null);
         }
         transaction.commit();
+    }
+
+    private void hideTab(FragmentTransaction transaction){
+        if (homeFragment != null)
+        {
+            transaction.hide(homeFragment);
+        }
+        if (categoryFragment != null)
+        {
+            transaction.hide(categoryFragment);
+        }
+        if (findFragment != null)
+        {
+            transaction.hide(findFragment);
+        }
+        if (mineFragment != null)
+        {
+            transaction.hide(mineFragment);
+        }
     }
 
     public static void actionStart(Context context, boolean isHome) {
@@ -143,7 +213,7 @@ public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnC
         fragmentManager = getSupportFragmentManager();
         if (isHome) {
             mainHome.setChecked(true);
-            changeFragment(new FragmentHome(), false);
+            changeFragment(HOME, false);
         }
     }
 
