@@ -38,6 +38,6 @@ public class ShoppingCar extends BaseFragment {
 
     @OnClick(R.id.go_shopping)
     void goShopping(View view) {
-        MainActivity.actionStart(getContext(), true);
+        MainActivity.actionStart(getContext(), true, false, false, false);
     }
 }

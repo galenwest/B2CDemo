@@ -11,22 +11,24 @@ import android.widget.AutoCompleteTextView;
 
 import client.enterprise.b2c.R;
 
-public class SearchEditText extends AutoCompleteTextView implements View.OnFocusChangeListener,TextWatcher {
+public class LoginEditText extends AutoCompleteTextView implements View.OnFocusChangeListener,TextWatcher {
   /**
    * 删除按钮的引用
    */
   private Drawable mClearDrawable;
   private boolean hasFoucs;
 
-  public SearchEditText(Context context) {
+  private OnLoginListener onLoginListener;
+
+  public LoginEditText(Context context) {
     this(context, null);
   }
-  public SearchEditText(Context context, AttributeSet attrs) {
+  public LoginEditText(Context context, AttributeSet attrs) {
     // 这里构造方法也很重要，不加这个很多属性不能再XML里面定义
     this(context, attrs, android.R.attr.editTextStyle);
   }
 
-  public SearchEditText(Context context, AttributeSet attrs, int defStyle) {
+  public LoginEditText(Context context, AttributeSet attrs, int defStyle) {
     super(context, attrs, defStyle);
     init();
   }
@@ -80,7 +82,7 @@ public class SearchEditText extends AutoCompleteTextView implements View.OnFocus
 
   /**
    * 设置清除图标的显示与隐藏，调用setCompoundDrawables为EditText绘制上去
-   *
+   * 
    * @param visible
    */
   protected void setClearIconVisible(boolean visible) {
@@ -95,6 +97,7 @@ public class SearchEditText extends AutoCompleteTextView implements View.OnFocus
   public void onTextChanged(CharSequence s, int start, int count, int after) {
     if (hasFoucs) {
       setClearIconVisible(s.length() > 0);
+      onLoginListener.loginBtIsClickable(s.length() > 0);
     }
   }
 
@@ -106,6 +109,14 @@ public class SearchEditText extends AutoCompleteTextView implements View.OnFocus
   @Override
   public void afterTextChanged(Editable s) {
 
+  }
+
+  public void setLoginBtIsClickable(OnLoginListener onLoginListener) {
+    this.onLoginListener = onLoginListener;
+  }
+
+  public interface OnLoginListener {
+    void loginBtIsClickable(boolean clickable);
   }
 
 }

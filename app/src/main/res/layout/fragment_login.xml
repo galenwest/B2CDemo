@@ -10,18 +10,19 @@
         android:layout_margin="20dp"
         android:orientation="vertical">
 
-        <client.enterprise.b2c.widget.SearchEditText
+        <client.enterprise.b2c.widget.LoginEditText
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:background="@mipmap/login_edit_bg"
             android:padding="6dp"
             android:hint="@string/hint_username"
+            android:singleLine="true"
             android:textColorHint="@color/ivory"
             android:drawableLeft="@mipmap/username_icon"
             android:textSize="20sp"/>
 
-        <client.enterprise.b2c.widget.SearchEditText
+        <client.enterprise.b2c.widget.LoginEditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="45dp"
@@ -30,6 +31,7 @@
             android:padding="6dp"
             android:inputType="textPassword"
             android:hint="@string/hint_password"
+            android:singleLine="true"
             android:textColorHint="@color/ivory"
             android:drawableLeft="@mipmap/password_icon"
             android:textSize="20sp"/>

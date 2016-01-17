@@ -27,6 +27,9 @@ import client.enterprise.b2c.widget.TopBar;
 public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnCheckedChangeListener {
 
     private static final String ISHOMETAG = "isHome";
+    private static final String ISCATEGORYTAG = "isCategory";
+    private static final String ISFINDTAG = "isFind";
+    private static final String ISMINETAG = "isMine";
 
     public static final String HOME = "home";
     public static final String CATEGOTY = "category";
@@ -36,7 +39,7 @@ public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnC
     private DoubleClickExitHelper mDoubleClickExit;
     private FragmentManager fragmentManager;
     private Fragment homeFragment, categoryFragment, findFragment, mineFragment;
-    private boolean isHome;
+    private boolean isHome,isCategory,isFind,isMine;
 
     @Bind(R.id.main_button_tabs) RadioGroup group;
     @Bind(R.id.main_home) RadioButton mainHome;
@@ -201,19 +204,37 @@ public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnC
         }
     }
 
-    public static void actionStart(Context context, boolean isHome) {
+    public static void actionStart(Context context, boolean isHome, boolean isCategory, boolean isFind, boolean isMine) {
         Intent intent = new Intent(context, MainActivity.class);
         intent.putExtra(ISHOMETAG, isHome);
+        intent.putExtra(ISCATEGORYTAG, isCategory);
+        intent.putExtra(ISFINDTAG, isFind);
+        intent.putExtra(ISMINETAG, isMine);
         context.startActivity(intent);
     }
 
     private void processExtraData() {
         Intent intent = getIntent();
         isHome = intent.getBooleanExtra(ISHOMETAG, false);
+        isCategory = intent.getBooleanExtra(ISCATEGORYTAG, false);
+        isFind = intent.getBooleanExtra(ISFINDTAG, false);
+        isMine = intent.getBooleanExtra(ISMINETAG, false);
         fragmentManager = getSupportFragmentManager();
         if (isHome) {
             mainHome.setChecked(true);
             changeFragment(HOME, false);
+        }
+        if (isCategory) {
+            mainCategory.setChecked(true);
+            changeFragment(CATEGOTY, false);
+        }
+        if (isFind) {
+            mainFind.setChecked(true);
+            changeFragment(FIND, false);
+        }
+        if (isMine) {
+            mainMine.setChecked(true);
+            changeFragment(MINE, false);
         }
     }
 

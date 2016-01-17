@@ -1,4 +1,4 @@
-package client.enterprise.b2c.model.data.api;
+package client.enterprise.b2c.util;
 
 /**
  * Created by raohoulin on 2016.1.11.

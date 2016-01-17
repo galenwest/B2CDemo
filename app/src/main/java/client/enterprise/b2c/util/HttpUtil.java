@@ -1,4 +1,4 @@
-package client.enterprise.b2c.model.data.api;
+package client.enterprise.b2c.util;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -10,7 +10,7 @@ import java.net.URL;
  * Created by raohoulin on 2016.1.11.
  */
 public class HttpUtil {
-    public static void sendHttpRequest(final String address, final HttpCallbackListener listener) {
+    public static void sendHttpGetRequest(final String address, final HttpCallbackListener listener) {
         new Thread(new Runnable() {
             @Override
             public void run() {

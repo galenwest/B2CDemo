@@ -60,7 +60,7 @@ public class SonActivity extends BaseFragmentActivity {
 
             @Override
             public void logoClick() {
-                MainActivity.actionStart(SonActivity.this, true);
+                MainActivity.actionStart(SonActivity.this, true, false, false, false);
             }
 
             @Override
