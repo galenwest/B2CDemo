@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import client.enterprise.b2c.model.bean.SearchHistoryData;
+import client.enterprise.b2c.model.bean.po.SearchHistoryData;
 
 /**
  * Created by raohoulin on 2015.12.28.

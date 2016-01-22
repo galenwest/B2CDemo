@@ -80,7 +80,7 @@
     <color name="paleturquoise">#afeeee</color> <!-- 苍宝石绿 -->
     <color name="greenyellow">#adff2f</color> <!-- 黄绿色 -->
     <color name="lightblue">#add8e6</color> <!-- 亮蓝色 -->
-    <color name="darkgrey">#a9a9a9</color> <!-- 暗灰色 -->
+    <color name="darkgrey">#a9a9a9</color> <!-- 灰色 -->
     <color name="brown">#a52a2a</color> <!-- 褐色 -->
     <color name="sienna">#a0522d</color> <!-- 赭色 -->
     <color name="darkorchid">#9932cc</color> <!-- 暗紫色 -->
@@ -108,6 +108,7 @@
     <color name="olivedrab">#6b8e23</color> <!-- 深绿褐色 -->
     <color name="slateblue">#6a5acd</color> <!-- 石蓝色 -->
     <color name="dimgrey">#696969</color> <!-- 暗灰色 -->
+    <color name="duckgrey">#444444</color> <!-- 暗灰色 -->
     <color name="mediumaquamarine">#66cdaa</color> <!-- 中绿色 -->
     <color name="cornflowerblue">#6495ed</color> <!-- 菊兰色 -->
     <color name="cadetblue">#5f9ea0</color> <!-- 军兰色 -->

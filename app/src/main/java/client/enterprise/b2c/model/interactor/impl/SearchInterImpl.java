@@ -3,7 +3,7 @@ package client.enterprise.b2c.model.interactor.impl;
 import java.util.List;
 
 import client.enterprise.b2c.AppContext;
-import client.enterprise.b2c.model.bean.SearchHistoryData;
+import client.enterprise.b2c.model.bean.po.SearchHistoryData;
 import client.enterprise.b2c.model.data.db.SearchHistoryDatabase;
 import client.enterprise.b2c.model.interactor.SearchInter;
 import client.enterprise.b2c.presenter.result.SearchFinishedListener;

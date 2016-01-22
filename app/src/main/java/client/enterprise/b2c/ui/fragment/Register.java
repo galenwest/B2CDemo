@@ -7,13 +7,13 @@ import android.view.ViewGroup;
 
 import butterknife.OnClick;
 import client.enterprise.b2c.R;
-import client.enterprise.b2c.base.BaseFragment;
+import client.enterprise.b2c.base.BaseFragmentManager;
 import client.enterprise.b2c.ui.activity.SonActivity;
 
 /**
  * Created by raohoulin on 2016.1.10.
  */
-public class RegisterOne extends BaseFragment {
+public class Register extends BaseFragmentManager {
     private SonActivity sonActivity;
 
     @Override
@@ -24,7 +24,7 @@ public class RegisterOne extends BaseFragment {
 
     @Override
     public int getLayoutID() {
-        return R.layout.fragment_register_one;
+        return R.layout.fragment_register;
     }
 
     @Override
@@ -39,6 +39,6 @@ public class RegisterOne extends BaseFragment {
 
     @OnClick(R.id.next)
     public void nextView(View view) {
-        sonActivity.changeFragment(new RegisterTwo(), false);
+//        sonActivity.switchContent(new RegisterPassword(), false);
     }
 }

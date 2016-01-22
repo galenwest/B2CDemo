@@ -9,11 +9,13 @@ import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 import client.enterprise.b2c.base.interf.BaseFragmentInterface;
+import client.enterprise.b2c.util.LogDebug;
 
 /**
  * Created by raohoulin on 2016.1.6.
  */
 public abstract class BaseFragment extends Fragment implements BaseFragmentInterface {
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = null;

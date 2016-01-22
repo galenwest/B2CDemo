@@ -11,12 +11,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ProgressBar;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 import client.enterprise.b2c.R;
-import client.enterprise.b2c.base.BaseFragment;
+import client.enterprise.b2c.base.BaseFragmentManager;
 import client.enterprise.b2c.presenter.LoginPer;
 import client.enterprise.b2c.presenter.impl.LoginPerImpl;
 import client.enterprise.b2c.ui.activity.MainActivity;
@@ -25,19 +24,18 @@ import client.enterprise.b2c.ui.view.LoginView;
 import client.enterprise.b2c.util.MyProgerssDialog;
 import client.enterprise.b2c.util.ToastUtils;
 import client.enterprise.b2c.widget.LoginEditText;
-import client.enterprise.b2c.widget.SearchEditText;
 
 /**
  * Created by raohoulin on 2016.1.9.
  */
-public class Login extends BaseFragment implements LoginView, LoginEditText.OnLoginListener {
+public class Login extends BaseFragmentManager implements LoginView, LoginEditText.OnLoginListener {
 
-    private static final String MSG_LOGIN_ERROR = "登陆错误";
     private static final String MSG_LOGIN_SUCCESS = "登陆成功";
-    public static final String MSG_LOGIN_ERROR_PASSWORD = "账户或密码错误";
-    public static final String MSG_LOGIN_ERROR_SERVER = "服务器错误";
+    public static final String MSG_USERNAME_NOT_FOUND = "账户不存在";
+    public static final String MSG_PASSWORD_ERROR = "密码错误";
     private static final String CONNECT_TIME_OUT = "请求服务器超时";
     private static final String RESPONSE_TIME_OUT = "服务器响应超时";
+    private static final String NET_WORK_ERROR = "网络错误";
 
     @Bind(R.id.username)
     LoginEditText username;
@@ -95,7 +93,7 @@ public class Login extends BaseFragment implements LoginView, LoginEditText.OnLo
 
     @OnClick(R.id.register)
     public void register(View view) {
-        sonActivity.changeFragment(new RegisterOne(), false);
+        sonActivity.switchContent(new Register(), false);
     }
 
     @OnClick(R.id.login)
@@ -131,37 +129,37 @@ public class Login extends BaseFragment implements LoginView, LoginEditText.OnLo
 
     @Override
     public void navigateToMine() {
-        MainActivity.actionStart(getContext(), false, false, false, true);
+        MainActivity.actionStart(getContext(), true, false, false, false, true);
     }
 
     @Override
-    public void showUsernameOrPasswordError() {
-        ToastUtils.showToastInCenter(MSG_LOGIN_ERROR_PASSWORD, getContext());
+    public void showPasswordError() {
+        ToastUtils.showToastInCenter(MSG_PASSWORD_ERROR);
     }
 
     @Override
-    public void showServerError() {
-        ToastUtils.showToastInCenter(MSG_LOGIN_ERROR_SERVER, getContext());
+    public void showUsernameNotFoundError() {
+        ToastUtils.showToastInCenter(MSG_USERNAME_NOT_FOUND);
     }
 
     @Override
     public void showConntctTimeOutError() {
-        ToastUtils.showToastInCenter(CONNECT_TIME_OUT, getContext());
+        ToastUtils.showToastInCenter(CONNECT_TIME_OUT);
     }
 
     @Override
     public void showResponseTimeOutError() {
-        ToastUtils.showToastInCenter(RESPONSE_TIME_OUT, getContext());
+        ToastUtils.showToastInCenter(RESPONSE_TIME_OUT);
     }
 
     @Override
-    public void showLoginError() {
-        ToastUtils.showToastInCenter(MSG_LOGIN_ERROR, getContext());
+    public void showNetWorkError() {
+        ToastUtils.showToastInCenter(NET_WORK_ERROR);
     }
 
     @Override
     public void showLoginSuccess() {
-        ToastUtils.showToastInCenter(MSG_LOGIN_SUCCESS, getContext());
+        ToastUtils.showToastInCenter(MSG_LOGIN_SUCCESS);
     }
 
     @Override

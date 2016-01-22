@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:paddingLeft="18dp"
+            android:paddingRight="18dp"
+            android:background="@color/white">
+
+            <Button
+                android:id="@+id/checkBut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="46dp"
+                android:background="@drawable/register_check_button_bg_selector"
+                android:text="@string/register_check_bt_text"
+                android:textColor="@color/gray"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <EditText
+                android:id="@+id/registerPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@id/checkBut"
+                android:minHeight="46dp"
+                android:background="@drawable/register_edit_bg_selector"
+                android:textSize="17sp"
+                android:hint="@string/register_phone_number"
+                android:textColorHint="@color/silver"
+                />
+
+            <EditText
+                android:id="@+id/registerCheckNum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="46dp"
+                android:background="@drawable/register_edit_bg_selector"
+                android:textSize="17sp"
+                android:layout_below="@id/registerPhone"
+                android:hint="@string/register_check_number"
+                android:textColorHint="@color/silver"
+                />
+
+            <EditText
+                android:id="@+id/registerPwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="46dp"
+                android:background="@drawable/register_edit_bg_selector"
+                android:textSize="17sp"
+                android:layout_below="@id/registerCheckNum"
+                android:hint="@string/register_password"
+                android:textColorHint="@color/silver"
+                />
+            <EditText
+                android:id="@+id/registerPwdRe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="46dp"
+                android:background="@drawable/register_edit_bg_selector"
+                android:textSize="17sp"
+                android:layout_below="@id/registerPwd"
+                android:hint="@string/register_password_re"
+                android:textColorHint="@color/silver"
+                />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/user_deal"/>
+
+            <Button
+                android:id="@+id/next"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/login_bt_bg"
+                android:layout_marginTop="10dp"
+                android:minHeight="39dp"
+                android:textColor="#aa7103"
+                android:textSize="18sp"
+                android:text="@string/register_text"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

@@ -17,7 +17,7 @@ import java.util.List;
 import butterknife.Bind;
 import client.enterprise.b2c.R;
 import client.enterprise.b2c.base.BaseActivity;
-import client.enterprise.b2c.model.bean.SearchHistoryData;
+import client.enterprise.b2c.model.bean.po.SearchHistoryData;
 import client.enterprise.b2c.presenter.SearchPer;
 import client.enterprise.b2c.presenter.impl.SearchPerImpl;
 import client.enterprise.b2c.ui.adapter.SelectHistoryAdapter;

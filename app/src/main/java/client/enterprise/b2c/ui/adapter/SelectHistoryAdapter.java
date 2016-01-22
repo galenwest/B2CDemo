@@ -1,7 +1,6 @@
 package client.enterprise.b2c.ui.adapter;
 
 import android.content.Context;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +10,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import client.enterprise.b2c.AppContext;
 import client.enterprise.b2c.R;
-import client.enterprise.b2c.model.bean.SearchHistoryData;
+import client.enterprise.b2c.model.bean.po.SearchHistoryData;
 import client.enterprise.b2c.presenter.SearchPer;
 import client.enterprise.b2c.ui.activity.SearchActivity;
 

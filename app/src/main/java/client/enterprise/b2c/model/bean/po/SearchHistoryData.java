@@ -1,4 +1,4 @@
-package client.enterprise.b2c.model.bean;
+package client.enterprise.b2c.model.bean.po;
 
 import java.io.Serializable;
 

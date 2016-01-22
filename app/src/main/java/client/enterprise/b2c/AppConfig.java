@@ -27,6 +27,8 @@ public class AppConfig {
     private Context mContext;
     private static AppConfig appConfig;
 
+    public static final boolean isDebug = true;
+
     public static AppConfig getAppConfig(Context context) {
         if (appConfig == null) {
             appConfig = new AppConfig();

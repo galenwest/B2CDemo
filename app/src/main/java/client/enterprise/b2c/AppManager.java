@@ -2,16 +2,18 @@ package client.enterprise.b2c;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.Fragment;
 
 import java.util.Stack;
 
 /**
- * activity堆栈式管理
+ * activity and fragment堆栈式管理
  * @author raohoulin
  */
 public class AppManager {
 
     private static Stack<Activity> activityStack;
+    private static Stack<Fragment> fragmentStack;
     private static AppManager instance;
 
     private AppManager() {}
@@ -37,11 +39,32 @@ public class AppManager {
     }
 
     /**
+     * 添加Fragment到堆栈
+     */
+    public void addFragment(Fragment fragment) {
+        if (fragmentStack == null) {
+            fragmentStack = new Stack<Fragment>();
+        }
+        fragmentStack.add(fragment);
+    }
+
+    /**
      * 获取当前Activity（堆栈中最后一个压入的）
      */
     public Activity currentActivity() {
         Activity activity = activityStack.lastElement();
         return activity;
+    }
+
+    /**
+     * 获取当前Fragment（堆栈中最后一个压入的）
+     */
+    public Fragment currentFragment() {
+        if (fragmentStack.isEmpty()) {
+            return null;
+        }
+        Fragment fragment = fragmentStack.lastElement();
+        return fragment;
     }
 
     /**
@@ -53,6 +76,14 @@ public class AppManager {
     }
 
     /**
+     * 结束当前Fragment（堆栈中最后一个压入的）
+     */
+    public void finishFragment() {
+        Fragment fragment = fragmentStack.lastElement();
+        finishFragment(fragment);
+    }
+
+    /**
      * 结束指定的Activity
      */
     public void finishActivity(Activity activity) {
@@ -60,6 +91,12 @@ public class AppManager {
             activityStack.remove(activity);
             activity.finish();
             activity = null;
+        }
+    }
+
+    public void finishFragment(Fragment fragment) {
+        if (fragment != null && !fragment.isHidden()) {
+            fragmentStack.remove(fragment);
         }
     }
 

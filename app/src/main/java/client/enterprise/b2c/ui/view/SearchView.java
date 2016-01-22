@@ -2,7 +2,7 @@ package client.enterprise.b2c.ui.view;
 
 import java.util.List;
 
-import client.enterprise.b2c.model.bean.SearchHistoryData;
+import client.enterprise.b2c.model.bean.po.SearchHistoryData;
 
 /**
  * Created by raohoulin on 2015.12.29.

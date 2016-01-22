@@ -20,9 +20,14 @@
     <string name="do_not_account">没有账户吗?</string>
     <string name="login_text"><b>登 陆</b></string>
     <string name="register_text"><b>注 册</b></string>
+    <string name="register_check_bt_text"><b>获取验证码</b></string>
     <string name="register_phone_number"><b>请输入手机号</b></string>
-    <string name="register_password"><b>请输注册密码</b></string>
+    <string name="register_check_number"><b>验证短信中的数字</b></string>
+    <string name="register_password"><b>请输入注册密码</b></string>
+    <string name="register_password_re"><b>再次输入注册密码</b></string>
     <string name="user_deal">注册既视为同意<b>用户注册协议</b></string>
     <string name="username_empty">账户不能为空</string>
     <string name="password_empty">密码不能为空</string>
+    <string name="user_account_say_hello">您好，</string>
+    <string name="user_account_set">账户设置 ></string>
 </resources>

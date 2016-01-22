@@ -6,15 +6,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.widget.Toast;
+import android.util.Log;
 
 import butterknife.Bind;
+import client.enterprise.b2c.AppManager;
 import client.enterprise.b2c.R;
 import client.enterprise.b2c.base.BaseFragmentActivity;
 import client.enterprise.b2c.ui.fragment.Login;
-import client.enterprise.b2c.ui.fragment.RegisterOne;
-import client.enterprise.b2c.ui.fragment.RegisterTwo;
-import client.enterprise.b2c.ui.fragment.ShoppingCar;
 import client.enterprise.b2c.widget.TopBarSon;
 
 /**
@@ -23,14 +21,14 @@ import client.enterprise.b2c.widget.TopBarSon;
 public class SonActivity extends BaseFragmentActivity {
     private static final String SONTAG = "sonTag";
 
-    public static final String SHOPPINGCAR = "ShoppingCar";
     public static final String LOGIN = "fragment_login";
 
     @Bind(R.id.top_bar_son)
     TopBarSon topBarSon;
     private FragmentManager fragmentManager;
-    private FragmentTransaction transaction;
     private String tag;
+
+    private Fragment mContent;
 
     public static void actionStart(Context context, String tag) {
         Intent intent = new Intent(context, SonActivity.class);
@@ -54,13 +52,16 @@ public class SonActivity extends BaseFragmentActivity {
         topBarSon.setOnTopbarClickListener(new TopBarSon.topbarClickListener() {
             @Override
             public void oneClick() {
-                if (!fragmentManager.popBackStackImmediate())
+                if (fragmentManager.popBackStackImmediate()) {
+                    mContent = AppManager.getAppManager().currentFragment();
+                } else {
                     finish();
+                }
             }
 
             @Override
             public void logoClick() {
-                MainActivity.actionStart(SonActivity.this, true, false, false, false);
+                MainActivity.actionStart(SonActivity.this, false, true, false, false, false);
             }
 
             @Override
@@ -70,16 +71,13 @@ public class SonActivity extends BaseFragmentActivity {
 
             @Override
             public void foreClick() {
-                changeFragment(new ShoppingCar(), true);
+                ShoppingCarActivity.actionStart(SonActivity.this);
             }
         });
 
         switch (tag) {
-            case SHOPPINGCAR :
-                changeFragment(new ShoppingCar(), true);
-                break;
             case LOGIN:
-                changeFragment(new Login(), true);
+                addFragment(new Login());
                 break;
             default:
                 break;
@@ -91,14 +89,40 @@ public class SonActivity extends BaseFragmentActivity {
         Intent intent = getIntent();
         tag = intent.getStringExtra(SONTAG);
     }
-
+/*
     public void changeFragment(Fragment fragment, boolean isInit) {
-        transaction = fragmentManager.beginTransaction();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.son_content, fragment);
         if (!isInit) {
             transaction.addToBackStack(null);
         }
         transaction.commit();
     }
+    */
+    public void addFragment(Fragment fragment) {
+        mContent = fragment;
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.add(R.id.son_content, fragment);
+        transaction.commit();
+    }
 
+    public void switchContent(Fragment to, boolean isInit) {
+        if (mContent != to) {
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            if (!to.isAdded()) { // 先判断是否被add过
+                transaction.hide(mContent).add(R.id.son_content, to);
+                if (!isInit) {
+                    transaction.addToBackStack(null);
+                }
+                transaction.commit(); // 隐藏当前的fragment，add下一个到Activity中
+            } else {
+                transaction.hide(mContent).show(to);
+                if (!isInit) {
+                    transaction.addToBackStack(null);
+                }
+                transaction.commit(); // 隐藏当前的fragment，显示下一个
+            }
+            mContent = to;
+        }
+    }
 }

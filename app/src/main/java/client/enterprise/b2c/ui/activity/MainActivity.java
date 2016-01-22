@@ -30,6 +30,7 @@ public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnC
     private static final String ISCATEGORYTAG = "isCategory";
     private static final String ISFINDTAG = "isFind";
     private static final String ISMINETAG = "isMine";
+    private static final String ISINIT = "isInit";
 
     public static final String HOME = "home";
     public static final String CATEGOTY = "category";
@@ -39,7 +40,7 @@ public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnC
     private DoubleClickExitHelper mDoubleClickExit;
     private FragmentManager fragmentManager;
     private Fragment homeFragment, categoryFragment, findFragment, mineFragment;
-    private boolean isHome,isCategory,isFind,isMine;
+    private boolean isHome,isCategory,isFind,isMine,isInit;
 
     @Bind(R.id.main_button_tabs) RadioGroup group;
     @Bind(R.id.main_home) RadioButton mainHome;
@@ -73,7 +74,7 @@ public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnC
 
                     @Override
                     public void rightClick() {
-                        SonActivity.actionStart(MainActivity.this, SonActivity.SHOPPINGCAR);
+                        ShoppingCarActivity.actionStart(MainActivity.this);
                     }
 
                     @Override
@@ -115,63 +116,79 @@ public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnC
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
             case R.id.main_home:
-                changeFragment(HOME, true);
+                changeFragment(HOME, false, false);
                 break;
             case R.id.main_category:
-                changeFragment(CATEGOTY, true);
+                changeFragment(CATEGOTY, false, false);
                 break;
             case R.id.main_find:
-                changeFragment(FIND, true);
+                changeFragment(FIND, false, false);
                 break;
             case R.id.main_mine:
-                changeFragment(MINE, true);
+                changeFragment(MINE, false, false);
                 break;
             default:
                 break;
         }
     }
 
-    public void changeFragment(String tab, boolean isInit) {
+    public void changeFragment(String tab, boolean isInit, boolean isAddStack) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
 
         switch (tab) {
             case HOME:
                 homeFragment=fragmentManager.findFragmentByTag(HOME);
-                hideTab(transaction);
-                if (homeFragment == null){
-                    homeFragment = new FragmentHome();
-                    transaction.add(R.id.main_content, homeFragment,HOME);
-                } else{
-                    transaction.show(homeFragment);
+                if (isInit) {
+                    transaction.replace(R.id.main_content, homeFragment);
+                } else {
+                    hideTab(transaction);
+                    if (homeFragment == null){
+                        homeFragment = new FragmentHome();
+                        transaction.add(R.id.main_content, homeFragment,HOME);
+                    } else{
+                        transaction.show(homeFragment);
+                    }
                 }
                 break;
             case CATEGOTY:
                 categoryFragment=fragmentManager.findFragmentByTag(CATEGOTY);
-                hideTab(transaction);
-                if (categoryFragment == null){
-                    categoryFragment = new FragmentCategory();
-                    transaction.add(R.id.main_content, categoryFragment,CATEGOTY);
-                } else{
-                    transaction.show(categoryFragment);
+                if (isInit) {
+                    transaction.replace(R.id.main_content, categoryFragment);
+                } else {
+                    hideTab(transaction);
+                    if (categoryFragment == null) {
+                        categoryFragment = new FragmentCategory();
+                        transaction.add(R.id.main_content, categoryFragment, CATEGOTY);
+                    } else {
+                        transaction.show(categoryFragment);
+                    }
                 }
                 break;
             case FIND:
                 findFragment=fragmentManager.findFragmentByTag(FIND);
-                hideTab(transaction);
-                if (findFragment == null){
-                    findFragment = new FragmentFind();
-                    transaction.add(R.id.main_content, findFragment,FIND);
-                } else{
-                    transaction.show(findFragment);
+                if (isInit) {
+                    transaction.replace(R.id.main_content, findFragment);
+                } else {
+                    hideTab(transaction);
+                    if (findFragment == null) {
+                        findFragment = new FragmentFind();
+                        transaction.add(R.id.main_content, findFragment, FIND);
+                    } else {
+                        transaction.show(findFragment);
+                    }
                 }
                 break;
             case MINE:
                 mineFragment=fragmentManager.findFragmentByTag(MINE);
                 hideTab(transaction);
-                if (mineFragment == null){
+                if (isInit) {
+                    transaction.remove(mineFragment);
+                    mineFragment = null;
+                }
+                if (mineFragment == null) {
                     mineFragment = new FragmentMine();
-                    transaction.add(R.id.main_content, mineFragment,MINE);
-                } else{
+                    transaction.add(R.id.main_content, mineFragment, MINE);
+                } else {
                     transaction.show(mineFragment);
                 }
                 break;
@@ -179,7 +196,7 @@ public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnC
                 break;
         }
 
-        if (!isInit) {
+        if (isAddStack) {
             transaction.addToBackStack(null);
         }
         transaction.commit();
@@ -204,12 +221,13 @@ public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnC
         }
     }
 
-    public static void actionStart(Context context, boolean isHome, boolean isCategory, boolean isFind, boolean isMine) {
+    public static void actionStart(Context context,boolean isInit, boolean isHome, boolean isCategory, boolean isFind, boolean isMine) {
         Intent intent = new Intent(context, MainActivity.class);
         intent.putExtra(ISHOMETAG, isHome);
         intent.putExtra(ISCATEGORYTAG, isCategory);
         intent.putExtra(ISFINDTAG, isFind);
         intent.putExtra(ISMINETAG, isMine);
+        intent.putExtra(ISINIT, isInit);
         context.startActivity(intent);
     }
 
@@ -219,23 +237,23 @@ public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnC
         isCategory = intent.getBooleanExtra(ISCATEGORYTAG, false);
         isFind = intent.getBooleanExtra(ISFINDTAG, false);
         isMine = intent.getBooleanExtra(ISMINETAG, false);
+        isInit = intent.getBooleanExtra(ISINIT, false);
         fragmentManager = getSupportFragmentManager();
         if (isHome) {
             mainHome.setChecked(true);
-            changeFragment(HOME, false);
+            changeFragment(HOME, isInit, false);
         }
         if (isCategory) {
             mainCategory.setChecked(true);
-            changeFragment(CATEGOTY, false);
+            changeFragment(CATEGOTY, isInit, false);
         }
         if (isFind) {
             mainFind.setChecked(true);
-            changeFragment(FIND, false);
+            changeFragment(FIND, isInit, false);
         }
         if (isMine) {
             mainMine.setChecked(true);
-            changeFragment(MINE, false);
+            changeFragment(MINE, isInit, false);
         }
     }
-
 }

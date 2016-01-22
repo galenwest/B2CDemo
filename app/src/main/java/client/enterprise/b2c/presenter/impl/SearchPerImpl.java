@@ -2,7 +2,7 @@ package client.enterprise.b2c.presenter.impl;
 
 import java.util.List;
 
-import client.enterprise.b2c.model.bean.SearchHistoryData;
+import client.enterprise.b2c.model.bean.po.SearchHistoryData;
 import client.enterprise.b2c.model.interactor.impl.SearchInterImpl;
 import client.enterprise.b2c.presenter.SearchPer;
 import client.enterprise.b2c.presenter.result.SearchFinishedListener;
