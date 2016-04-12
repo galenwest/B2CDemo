@@ -93,7 +93,7 @@
                 android:text="@string/user_deal"/>
 
             <Button
-                android:id="@+id/next"
+                android:id="@+id/register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/login_bt_bg"

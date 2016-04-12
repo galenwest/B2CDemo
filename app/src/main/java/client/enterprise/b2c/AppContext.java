@@ -21,8 +21,10 @@ import client.enterprise.b2c.model.bean.po.User;
 import client.enterprise.b2c.model.bean.vo.ResponseResult;
 import client.enterprise.b2c.model.data.api.ApiHttpClient;
 import client.enterprise.b2c.model.data.api.Urls;
+import client.enterprise.b2c.ui.view.NetWorkView;
 import client.enterprise.b2c.util.Check;
 import client.enterprise.b2c.util.LogDebug;
+import client.enterprise.b2c.util.NetWorkUtils;
 import client.enterprise.b2c.util.StringUtils;
 import client.enterprise.b2c.util.ToastUtils;
 import cz.msebera.android.httpclient.Header;
@@ -31,65 +33,25 @@ import cz.msebera.android.httpclient.conn.ConnectTimeoutException;
 /**
  * Created by raohoulin on 2015.12.29.
  */
-public class AppContext extends BaseApplication {
+public class AppContext extends BaseApplication implements NetWorkView {
+
+    private static final String CONNECT_ERROR = "网络连接错误，请检查网络";
+    private static final String CONNECT_TIME_OUT = "请求服务器超时";
+    private static final String RESPONSE_TIME_OUT = "服务器响应超时";
+    private static final String NET_WORK_ERROR = "网络错误";
 
     private static AppContext instance;
 
     private User user = null;
-    private boolean isLogin;
-    private String signature;
-
-    public boolean isLogin() {
-        return isLogin;
-    }
-
-    public String getSignature() {
-        return signature;
-    }
-
-    /**
-     * 获得当前app运行的AppContext
-     *
-     * @return
-     */
-    public static AppContext getInstance() {
-        return instance;
-    }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        instance = this;
-        initNetWork();
-        initLogin();
-    }
-
-    private void initLogin() {
-        user = getLoginUser();
-        if (null != user && !("".equals(user.getSignature()) || user.getSignature() == null)) {
-            String username = user.getU_ClientNum();
-            String password = user.getU_Pwd();
-            checkAcount(username, password);
-        } else {
-            this.cleanLoginInfo();
-        }
-    }
-
-    private void checkAcount(String username, String password) {
-        RequestParams params = new RequestParams();
-        if (Check.checkPhone(password)) {
-            params.put("loag", 1);
-        } else {
-            params.put("loag", 0);
-        }
-        params.put("username", username);
-        params.put("userpwd", password);
-        ApiHttpClient.post(Urls.login, params, loginHandler);
-    }
+    private boolean isLogin; // 是否登陆
+    private String signature; // 登陆用户标识SessionID
+    private boolean isEnd; // AppStart加载是否结束
+    private boolean isLoginSever; // 服务端是否登陆
 
     private final TextHttpResponseHandler loginHandler = new TextHttpResponseHandler() {
         @Override
         public void onSuccess(int statusCode, Header[] headers, String responseString) {
+            isEnd = true;
             String requestCode = null, result = null;
             try {
                 JSONObject response = new JSONObject(responseString);
@@ -140,14 +102,157 @@ public class AppContext extends BaseApplication {
 
         @Override
         public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-            ToastUtils.showToastInBottom("网络未连接，请检查网络");
+            isEnd = true;
+            if (throwable.getClass().getName().equals(ConnectTimeoutException.class.getName())) {
+                AppContext.getInstance().showConntctTimeOutError();
+            } else if (throwable.getClass().getName().equals(SocketTimeoutException.class.getName())) {
+                AppContext.getInstance().showConntctTimeOutError();
+            } else {
+                AppContext.getInstance().showConntctTimeOutError();
+            }
+        }
+    };
+
+    private final TextHttpResponseHandler isloginSeverHandler = new TextHttpResponseHandler() {
+        @Override
+        public void onSuccess(int statusCode, Header[] headers, String responseString) {
+            String requestCode = null, result = null;
+            try {
+                JSONObject response = new JSONObject(responseString);
+                requestCode = response.getString("requestCode");
+                result = response.getString("result");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            if (ResponseResult.SUCCESS.equals(requestCode)) {
+                String statue = null, info = null;
+                try {
+                    JSONObject loginBuffer = new JSONObject(result);
+                    statue = loginBuffer.getString("Statue");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                switch (statue) {
+                    case "0":
+                        isLoginSever = false;
+                        String username = user.getU_ClientNum();
+                        String password = user.getU_Pwd();
+                        RequestParams params = new RequestParams();
+                        if (Check.checkPhone(password)) {
+                            params.put("loag", 1);
+                        } else {
+                            params.put("loag", 0);
+                        }
+                        params.put("username", username);
+                        params.put("userpwd", password);
+                        ApiHttpClient.post(Urls.login, params, loginHandler);
+                        break;
+                    case "1":
+                        isLoginSever = true;
+                        isEnd = true;
+                        break;
+                    default:
+                        break;
+                }
+            } else if (ResponseResult.ERROR.equals(requestCode)) {
+                isLoginSever = false;
+                isEnd = true;
+            }
         }
 
         @Override
-        public void onFinish() {
-            super.onFinish();
+        public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+            isEnd = true;
+            if (throwable.getClass().getName().equals(ConnectTimeoutException.class.getName())) {
+                AppContext.getInstance().showConntctTimeOutError();
+            } else if (throwable.getClass().getName().equals(SocketTimeoutException.class.getName())) {
+                AppContext.getInstance().showConntctTimeOutError();
+            } else {
+                AppContext.getInstance().showConntctTimeOutError();
+            }
         }
     };
+
+    /**
+     * 获得当前app运行的AppContext
+     *
+     * @return
+     */
+    public static AppContext getInstance() {
+        if (instance == null) {
+            synchronized (AppContext.class) {
+                if (instance == null) {
+                    instance = new AppContext();
+                }
+            }
+        }
+        return instance;
+    }
+
+    public boolean isLogin() {
+        return isLogin;
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public boolean isEnd() {
+        return isEnd;
+    }
+
+    @Override
+    public void showConntctError() {
+        ToastUtils.showToastInBottom(CONNECT_ERROR);
+    }
+
+    @Override
+    public void showConntctTimeOutError() {
+        ToastUtils.showToastInBottom(CONNECT_TIME_OUT);
+    }
+
+    @Override
+    public void showResponseTimeOutError() {
+        ToastUtils.showToastInBottom(RESPONSE_TIME_OUT);
+    }
+
+    @Override
+    public void showNetWorkError() {
+        ToastUtils.showToastInBottom(NET_WORK_ERROR);
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        instance = this;
+        initNetWork();
+        initLogin();
+    }
+
+    private void initLogin() {
+        user = getLoginUser();
+        LogDebug.log("=============="+user.getSignature());
+        if (null != user && !("".equals(user.getSignature()) || user.getSignature() == null)) {
+            this.isLogin = true;
+
+            if (!NetWorkUtils.isNetAvailable()) {
+                isEnd = true;
+                showConntctError();
+            } else {
+                checkAcount();
+            }
+        } else {
+            this.cleanLoginInfo();
+            isEnd = true;
+        }
+    }
+
+    private void checkAcount() {
+        isEnd = false;
+        RequestParams isLoginParams = new RequestParams();
+        isLoginParams.put("signature", getSignature());
+        ApiHttpClient.post(Urls.isLoginSever, isLoginParams, isloginSeverHandler);
+    }
 
     private void initNetWork() {
         AsyncHttpClient client = new AsyncHttpClient();
@@ -248,11 +353,12 @@ public class AppContext extends BaseApplication {
     }
 
     private String isNull(String isNull) {
-        return isNull==null ? "" : isNull;
+        return isNull == null ? "" : isNull;
     }
 
     /**
      * 获取登录信息
+     *
      * @return User
      */
     public User getLoginUser() {
@@ -277,6 +383,8 @@ public class AppContext extends BaseApplication {
     public void cleanLoginInfo() {
         this.signature = "";
         this.isLogin = false;
+        ApiHttpClient.cleanCookie();
+        this.cleanCookie();
         removeProperty("user.signature", "user.uid", "user.name", "user.face", "user.account",
                 "user.pwd", "user.registerData", "user.tellphone",
                 "user.type", "user.status", "user.vipNum");

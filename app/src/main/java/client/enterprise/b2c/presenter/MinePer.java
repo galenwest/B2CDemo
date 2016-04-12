@@ -6,4 +6,6 @@ package client.enterprise.b2c.presenter;
 public interface MinePer {
 
     public void pullUserData();
+
+    public void cleanUserData();
 }

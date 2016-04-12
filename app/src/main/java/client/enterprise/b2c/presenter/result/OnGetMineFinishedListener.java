@@ -10,4 +10,8 @@ public interface OnGetMineFinishedListener {
     public void onPullUserDataSucceed(User user);
 
     public void onPullUserDataError();
+
+    public void onLoginOutSucceed();
+
+    public void onLoginOutfailed();
 }

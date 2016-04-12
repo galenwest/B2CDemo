@@ -8,4 +8,6 @@ import client.enterprise.b2c.presenter.result.OnGetMineFinishedListener;
 public interface MineInter {
 
     public void pullData(OnGetMineFinishedListener onGetMineFinishedListener);
+
+    public void loginOut(String signature, OnGetMineFinishedListener onGetMineFinishedListener);
 }

@@ -6,12 +6,6 @@ public interface OnLoginFinishedListener {
 
     public void onPasswordEmpty();
 
-    public void onNetWorkError();
-
-    public void onConntctTimeOutError();
-
-    public void onResponseTimeOutError();
-
     public void onLoginSuccess(String statue, String responseString);
 
     public void onLoginError(String statue, String responseString);

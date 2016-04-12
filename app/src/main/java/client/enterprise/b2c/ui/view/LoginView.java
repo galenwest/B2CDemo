@@ -15,12 +15,6 @@ public interface LoginView {
 
     public void showUsernameNotFoundError();
 
-    public void showConntctTimeOutError();
-
-    public void showResponseTimeOutError();
-
-    public void showNetWorkError();
-
     public void showLoginSuccess();
 
 }

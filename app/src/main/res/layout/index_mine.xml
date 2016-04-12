@@ -2,7 +2,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:scrollbars="none"
+    android:background="@color/floralwhite">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -68,19 +69,261 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/user_head"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="39dp"
-                    android:textColor="@color/duckgrey"
+                    android:layout_marginRight="28dp"
+                    android:textColor="@color/darkgrey"
                     android:textSize="16sp"
                     android:text="@string/user_account_set" />
 
             </RelativeLayout>
         </RelativeLayout>
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/main_mine"
-            android:textSize="50sp" />
+            android:layout_marginTop="13dp"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:textColor="@color/duckgrey"
+                android:textSize="18sp"
+                android:drawableLeft="@mipmap/order"
+                android:gravity="center_vertical"
+                android:text="@string/my_order"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textColor="@color/darkgrey"
+                android:textSize="16sp"
+                android:drawableRight="@mipmap/back_turn"
+                android:gravity="center_vertical"
+                android:text="@string/look_order"/>
+        </LinearLayout>
+
+        <RadioGroup
+            android:id="@+id/main_button_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_marginTop="2dp"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/main_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="0dp"
+                android:drawableTop="@mipmap/need_pay"
+                android:button="@null"
+                android:gravity="center"
+                android:textColor="@color/duckgrey"
+                android:layout_marginBottom="3dp"
+                android:textSize="13sp"
+                android:text="@string/need_pay"/>
+            <RadioButton
+                android:id="@+id/main_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="0dp"
+                android:drawableTop="@mipmap/take_goods"
+                android:button="@null"
+                android:gravity="center"
+                android:textColor="@color/duckgrey"
+                android:layout_marginBottom="3dp"
+                android:textSize="13sp"
+                android:text="@string/take_goods"/>
+            <RadioButton
+                android:id="@+id/main_find"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="0dp"
+                android:drawableTop="@mipmap/need_evaluate"
+                android:button="@null"
+                android:gravity="center"
+                android:textColor="@color/duckgrey"
+                android:layout_marginBottom="3dp"
+                android:textSize="13sp"
+                android:text="@string/need_evaluate"/>
+            <RadioButton
+                android:id="@+id/main_mine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="0dp"
+                android:drawableTop="@mipmap/need_service"
+                android:button="@null"
+                android:gravity="center"
+                android:textColor="@color/duckgrey"
+                android:layout_marginBottom="3dp"
+                android:textSize="13sp"
+                android:text="@string/need_service"/>
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:textColor="@color/duckgrey"
+                android:textSize="18sp"
+                android:drawableLeft="@mipmap/history"
+                android:gravity="center_vertical"
+                android:text="@string/browse_history"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/back_turn"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:textColor="@color/duckgrey"
+                android:textSize="18sp"
+                android:drawableLeft="@mipmap/you_like"
+                android:gravity="center_vertical"
+                android:text="@string/you_like"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/back_turn"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/you_like_one" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:textSize="13sp"
+                    android:text="推荐的商品详情，显示大概信息"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/you_like_one" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:textSize="13sp"
+                    android:text="推荐的商品详情，显示大概信息"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/you_like_one" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:textSize="13sp"
+                    android:text="推荐的商品详情，显示大概信息"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:textColor="@color/duckgrey"
+                android:textSize="18sp"
+                android:drawableLeft="@mipmap/help"
+                android:gravity="center_vertical"
+                android:text="@string/help_feedback"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:padding="10dp"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/back_turn"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/login_out"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/login_bt_bg"
+            android:visibility="gone"
+            android:textColor="#aa7103"
+            android:textSize="20sp"
+            android:text="@string/login_out"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="18dp" />
     </LinearLayout>
 </ScrollView>

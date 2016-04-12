@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -14,7 +15,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import butterknife.Bind;
 import butterknife.OnClick;
-import client.enterprise.b2c.AppContext;
 import client.enterprise.b2c.R;
 import client.enterprise.b2c.base.BaseFragment;
 import client.enterprise.b2c.model.bean.po.User;
@@ -36,6 +36,7 @@ public class FragmentMine extends BaseFragment implements MineView{
     @Bind(R.id.user_info) RelativeLayout userInfo;
     @Bind(R.id.user_head) ImageView userHead;
     @Bind(R.id.user_account) TextView userAccount;
+    @Bind(R.id.login_out) Button loginOut;
     ProgressDialog loginProgerss;
 
     @Override
@@ -68,7 +69,7 @@ public class FragmentMine extends BaseFragment implements MineView{
     public void showProgress() {
         if (loginProgerss == null) {
             loginProgerss = new ProgressDialog(getActivity());
-            MyProgerssDialog.dialog(loginProgerss, "正在拉取信息...", android.R.drawable.ic_dialog_info);
+            MyProgerssDialog.dialog(loginProgerss, "正在请求中...", android.R.drawable.ic_dialog_info);
         }
     }
 
@@ -84,6 +85,7 @@ public class FragmentMine extends BaseFragment implements MineView{
     public void showLoginHeadImg() {
         headImg.setVisibility(View.VISIBLE);
         userInfo.setVisibility(View.GONE);
+        loginOut.setVisibility(View.GONE);
     }
 
     @Override
@@ -98,5 +100,11 @@ public class FragmentMine extends BaseFragment implements MineView{
                 .into(userHead);
         userAccount.setText(user.getU_CName());
         headImg.setVisibility(View.GONE);
+        loginOut.setVisibility(View.VISIBLE);
+    }
+
+    @OnClick(R.id.login_out)
+    public void loginOut(View view) {
+        minePer.cleanUserData();
     }
 }

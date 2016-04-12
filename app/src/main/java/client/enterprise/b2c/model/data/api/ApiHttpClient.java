@@ -16,16 +16,27 @@ import cz.msebera.android.httpclient.client.params.ClientPNames;
 public class ApiHttpClient {
 
     public static AsyncHttpClient client;
-    public final static String HOST = "115.158.64.20:8000";
+    public final static String HOST = "115.158.64.20";
     private static String API_URL = "http://" + HOST + "/%s";
     private static String appCookie;
 
     public ApiHttpClient() {
     }
 
+    public static AsyncHttpClient getHttpClient() {
+        if (client == null) {
+            synchronized (ApiHttpClient.class) {
+                if (client == null) {
+                    client = new AsyncHttpClient();
+                }
+            }
+        }
+        return client;
+    }
+
     public static void setHttpClient(AsyncHttpClient c) {
         client = c;
-        client.setTimeout(5000);
+        client.setTimeout(3000);
         client.addHeader("Accept-Language", Locale.getDefault().toString());
         client.addHeader("Host", HOST);
         client.addHeader("Connection", "Keep-Alive");

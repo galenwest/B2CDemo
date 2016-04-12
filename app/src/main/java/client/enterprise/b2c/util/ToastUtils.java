@@ -14,7 +14,7 @@ public class ToastUtils {
     public static void showToastInBottom(String msg) {
         Context context = AppContext.getInstance();
         Toast toast = Toast.makeText(context, msg + "", Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.BOTTOM, 0, ScreenUtils.px2dip(context, 150));
+        toast.setGravity(Gravity.BOTTOM, 0, ScreenUtils.px2dip(context, 260));
         toast.show();
     }
 

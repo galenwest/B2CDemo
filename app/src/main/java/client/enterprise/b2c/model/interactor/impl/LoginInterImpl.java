@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import java.net.SocketTimeoutException;
 
+import client.enterprise.b2c.AppContext;
 import client.enterprise.b2c.model.bean.bo.LoginBuffer;
 import client.enterprise.b2c.model.bean.vo.ResponseResult;
 import client.enterprise.b2c.model.data.api.ApiHttpClient;
@@ -27,7 +28,6 @@ public class LoginInterImpl implements LoginInteractor {
     private final TextHttpResponseHandler loginHandler = new TextHttpResponseHandler() {
         @Override
         public void onSuccess(int statusCode, Header[] headers, String responseString) {
-            LogDebug.log("Success:" + statusCode + "\nresponse : " + responseString);
             String requestCode = null, result = null;
             try {
                 JSONObject response = new JSONObject(responseString);
@@ -77,14 +77,13 @@ public class LoginInterImpl implements LoginInteractor {
 
         @Override
         public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-            LogDebug.log("Failure:" + statusCode + "responseString" + responseString + ";throwable=" + throwable.getClass());
 
             if (throwable.getClass().getName().equals(ConnectTimeoutException.class.getName())) {
-                finishedListener.onConntctTimeOutError();
+                AppContext.getInstance().showConntctTimeOutError();
             } else if (throwable.getClass().getName().equals(SocketTimeoutException.class.getName())) {
-                finishedListener.onResponseTimeOutError();
+                AppContext.getInstance().showConntctTimeOutError();
             } else {
-                finishedListener.onNetWorkError();
+                AppContext.getInstance().showConntctTimeOutError();
             }
         }
 

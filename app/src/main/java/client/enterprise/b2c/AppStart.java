@@ -14,10 +14,12 @@ import client.enterprise.b2c.util.SharedUtil;
  * Created by raohoulin on 2015.12.25.
  */
 public class AppStart extends BaseActivity {
+    private int TIME = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /*
         new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {
@@ -25,7 +27,26 @@ public class AppStart extends BaseActivity {
                 return false;
             }
         }).sendEmptyMessageDelayed(0, 2000);
+        */
+        handler.postDelayed(runnable, TIME);
     }
+
+    Handler handler = new Handler();
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            // handler自带方法实现定时器
+            try {
+                if (AppContext.getInstance().isEnd()) {
+                    redirectTo();
+                } else {
+                    handler.postDelayed(this, TIME);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    };
 
     @Override
     public int getLayoutID() {

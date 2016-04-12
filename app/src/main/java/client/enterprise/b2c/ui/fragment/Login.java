@@ -143,21 +143,6 @@ public class Login extends BaseFragmentManager implements LoginView, LoginEditTe
     }
 
     @Override
-    public void showConntctTimeOutError() {
-        ToastUtils.showToastInCenter(CONNECT_TIME_OUT);
-    }
-
-    @Override
-    public void showResponseTimeOutError() {
-        ToastUtils.showToastInCenter(RESPONSE_TIME_OUT);
-    }
-
-    @Override
-    public void showNetWorkError() {
-        ToastUtils.showToastInCenter(NET_WORK_ERROR);
-    }
-
-    @Override
     public void showLoginSuccess() {
         ToastUtils.showToastInCenter(MSG_LOGIN_SUCCESS);
     }
